@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Items</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <h1>Admin Panel - Item Management</h1>
+        <%- include('partials/nav') %>
+    </header>
+
+    <div class="admin-container">
+        <h2>Create New Item</h2>
+        <form action="/admin/items" method="POST" class="admin-form">
+            <input type="text" name="name_en" placeholder="Name (EN)" required>
+            <input type="text" name="name_kz" placeholder="Name (KZ)" required>
+            <textarea name="description_en" placeholder="Description (EN)" required></textarea>
+            <textarea name="description_kz" placeholder="Description (KZ)" required></textarea>
+            <input type="text" name="images" placeholder="Image URLs (comma-separated)" required>
+            <button type="submit">Create Item</button>
+        </form>
+
+        <h2>Item Management</h2>
+        <table>
+            <tr>
+                <th>Name (EN)</th>
+                <th>Name (KZ)</th>
+                <th>Actions</th>
+            </tr>
+            <% items.forEach(item => { %>
+                <tr>
+                    <td><%= item.name_en %></td>
+                    <td><%= item.name_kz %></td>
+                    <td>
+                        <a href="/admin/items/edit/<%= item._id %>" class="button">Edit</a>
+                        <button onclick="deleteItem('<%= item._id %>')" class="button">Delete</button>
+                    </td>
+                </tr>
+            <% }) %>
+        </table>
+    </div>
+
+    <script>
+        async function deleteItem(itemId) {
+            if (!confirm('Are you sure you want to delete this item?')) return;
+
+            try {
+                const response = await fetch(`/admin/items/${itemId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    alert('Item deleted successfully.');
+                    location.reload();
+                } else {
+                    alert('Failed to delete item.');
+                }
+            } catch (error) {
+                console.error('Error deleting item:', error);
+                alert('An error occurred while deleting the item.');
+            }
+        }
+    </script>
+</body>
+</html>

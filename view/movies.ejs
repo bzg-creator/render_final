@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies Database</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <h1>Movies Database</h1>
+        <%- include('partials/nav') %>
+        <div id="searchBox">
+            <input id="movieInput" type="text" placeholder="Search movies...">
+            <button id="searchMovieBtn">Search</button>
+        </div>
+    </header>
+    <div id="moviesContainer"></div>
+    <footer>© Yelarys, Farida, Bekzhan, IT-2306</footer>
+    <script src="/movies.js"></script>
+</body>
+</html>

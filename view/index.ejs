@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Weather App</title>
+  <link rel="stylesheet" href="style.css" />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+  />
+
+  <!-- Add Slick Carousel CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+</head>
+<body>
+  <header>
+    <h1>Weather</h1>
+    <%- include('partials/nav') %>
+    <div id="searchBox">
+      <input id="cityInput" type="text" placeholder="Enter city" />
+      <button id="getWeatherBtn">Get Weather</button>
+    </div>
+  </header>
+  <div id="weather"></div>
+  <div id="forecast" class="forecast-container"></div>
+  <div id="map" style="height: 400px;"></div>
+
+  <!-- Item Display -->
+  <div class="item-container">
+    <% items.forEach(item => { %>
+      <div class="item-block">
+        <h3><%= item.name_en %> / <%= item.name_kz %></h3>
+        <p><%= item.description_en %> / <%= item.description_kz %></p>
+        <div class="image-carousel">
+          <% item.images.forEach(image => { %>
+            <div><img src="<%= image %>" alt="Item Image"></div>
+          <% }) %>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+
+  <footer>© Yelarys, Farida, Bekzhan, IT-2306</footer>
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+
+  <!-- Add jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Add Slick Carousel JS -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      $('.image-carousel').slick({
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        adaptiveHeight: true
+      });
+    });
+  </script>
+</body>
+</html>

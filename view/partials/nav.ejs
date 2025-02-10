@@ -1,0 +1,10 @@
+<nav>
+    <a href="/">Weather</a>
+    <a href="/movies">Movies</a>
+    <a href="/movie-quotes">Quotes</a>
+    <% if (locals.user && user.isAdmin) { %>
+        <a href="/admin">Admin Panel</a>
+        <a href="/admin/items">Item Management</a>  <!-- Add this line -->
+    <% } %>
+    <a href="/logout">Logout</a>
+</nav>
